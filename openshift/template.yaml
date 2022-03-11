@@ -40,6 +40,8 @@ objects:
             value: ${MAX_IDLE_MINUTES}
           - name: MAX_ERRORS
             value: ${MAX_ERRORS}
+          - name: N_WORKERS
+            value: ${N_WORKERS}
           - name: ES_SERVER
             valueFrom:
               secretKeyRef:
@@ -177,3 +179,5 @@ parameters:
   value: ''
 - name: MAX_ERRORS
   value: ''
+- name: N_WORKERS
+  value: '5'
