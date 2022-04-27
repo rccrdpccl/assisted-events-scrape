@@ -34,6 +34,7 @@ setuptools.setup(
     entry_points={
         'console_scripts': [
             'events_scrape = events_scrape.events_scrape:main',
+            'events_fetcher = events_fetcher.fetch:run',
         ],
     },
     include_package_data=True,

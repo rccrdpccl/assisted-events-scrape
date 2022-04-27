@@ -20,7 +20,7 @@ class ClusterEventsStorage:
         if config.elasticsearch.username:
             http_auth = (config.elasticsearch.username, config.elasticsearch.password)
         es_client = elasticsearch.Elasticsearch(config.elasticsearch.host, http_auth=http_auth)
-        return ClusterEventsStorage(inventory_client, es_client, config.inventory_url, config.elasticsearch.index)
+        return ClusterEventsStorage(inventory_client, es_client, config.ai_client.inventory_url, config.elasticsearch.index)
 
     def __init__(self, assisted_client, es_client, inventory_url, index):
         self._client = assisted_client

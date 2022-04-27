@@ -32,11 +32,20 @@ class ElasticsearchConfig:
             get_env("ES_USER"),
             get_env("ES_PASS"))
 
+@dataclass
+class AIClientConfig:
+    inventory_url: str
+    offline_token: str
+
+    @staticmethod
+    def create_from_env() -> 'AIClientConfig':
+        return AIClientConfig(
+            get_env("ASSISTED_SERVICE_URL"),
+            get_env("OFFLINE_TOKEN"))
 
 @dataclass
 class ScraperConfig:
-    inventory_url: str
-    offline_token: str
+    ai_client: AIClientConfig
     sentry: SentryConfig
     elasticsearch: ElasticsearchConfig
     max_idle_minutes: int
@@ -47,8 +56,7 @@ class ScraperConfig:
     def create_from_env() -> 'ScraperConfig':
         n_workers = max(MINIMUM_WORKERS, int(get_env("N_WORKERS", default=DEFAULT_ENV_N_WORKERS)))
         return ScraperConfig(
-            get_env("ASSISTED_SERVICE_URL"),
-            get_env("OFFLINE_TOKEN"),
+            AIClientConfig.create_from_env(),
             SentryConfig.create_from_env(),
             ElasticsearchConfig.create_from_env(),
             int(get_env("MAX_IDLE_MINUTES", default=DEFAULT_ENV_MAX_IDLE_MINUTES)),

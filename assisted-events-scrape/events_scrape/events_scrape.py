@@ -24,7 +24,8 @@ es_logger.setLevel(logging.WARNING)
 
 class ScrapeEvents:
     def __init__(self, config: ScraperConfig):
-        self._client = ClientFactory.create_client(url=config.inventory_url, offline_token=config.offline_token)
+        ai_client_config = config.ai_client
+        self._client = ClientFactory.create_client(url=ai_client_config.inventory_url, offline_token=ai_client.config.offline_token)
         self._cluster_events_storage = ClusterEventsStorage.create_with_inventory_client(self._client, config)
 
         self._cluster_repo = ClusterRepository(self._client)
