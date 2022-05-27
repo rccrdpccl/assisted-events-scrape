@@ -35,6 +35,8 @@ setuptools.setup(
         'console_scripts': [
             'events_scrape = events_scrape.events_scrape:main',
             'ccx_export = ccx_export:export_events',
+            'hydrate = events:hydrate',
+            'project = events:project',
         ],
     },
     include_package_data=True,
